@@ -3,6 +3,7 @@ var summoners = [];
 
 //get summoner names
 $(function(){
+	//access google spreadsheet of summoner names
 	$.getJSON('https://spreadsheets.google.com/feeds/cells/0AocJhXg2kCdQdEhoUlBrOUwyMkRaN3d3Nmw0NU1QZkE/od6/public/basic?alt=json-in-script&callback=?', function(response){
 		var summonerObjects = response.feed.entry;
 		for(var i = 1; i < summonerObjects.length; i++){
@@ -18,14 +19,14 @@ $(function(){
 
 //get summoner id
 function getSummonerId(index){
-	$.getJSON('https://prod.api.pvp.net/api/lol/na/v1.1/summoner/by-name/'+summoners[index].name+'?api_key=11edefd4-07d5-42f4-98c7-60e87e327f0e', function(response){
+	$.getJSON('https://prod.api.pvp.net/api/lol/na/v1.1/summoner/by-name/'+summoners[index].name+'?api_key=<insert key here>', function(response){
 		summoners[index].id = response.id;
 	});
 };
 
 //get ranked info - will return 404 if not ranked
 function getSummonerInfo(sid){
-	var jqxhr = $.getJSON('https://prod.api.pvp.net/api/na/v2.1/league/by-summoner/'+sid+'?api_key=11edefd4-07d5-42f4-98c7-60e87e327f0e', function(response){
+	var jqxhr = $.getJSON('https://prod.api.pvp.net/api/na/v2.1/league/by-summoner/'+sid+'?api_key=<insert key here>', function(response){
 		//console.log(response);
 		//console.log(response[sid]);
 		//console.log(response[sid].queue);
